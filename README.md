@@ -4,29 +4,28 @@ Warning: due to a major dependency upgrade from elasticsearch version `1.7.2` to
 
 ------
 
-README
-======
+# README
 
-Build Status
-------------
+## Build Status
+
 [![Circle CI](https://circleci.com/gh/pelias/vagrant.svg?style=svg)](https://circleci.com/gh/pelias/vagrant)
 
-Requirements
-------------
+## Requirements
+
 * a system with ~4GB of RAM and ~20GB of free disk space to load a modest test environment
 * ruby 2.x
 * [ChefDK](http://downloads.getchef.com/chef-dk/)
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads) ~> 1.5
 * [Vagrant](https://www.vagrantup.com/downloads.html) ~> 1.7
 
-Goals
------
+## Goals
+
 * to provide, via the included Chef code, a reference for installing your own Pelias system:
   * learn what dependencies you'll need, what the workflow looks like and how you can mold that to your own environment and needs
 * to provide a sandbox environment for people to do quick development against a local Pelias instance
 
-Access points
--------------
+## Access points
+
 * API: `curl http://localhost:3100/v1`
 * [Leaflet Demo](https://mapzen.github.io/leaflet-geocoder/#12/40.7258/-73.9804): references the API on search.mapzen.com, change url to localhost:3100 so you can see a visual representation of the data you're loading
 * `vagrant ssh && sudo su -` and you've got free reign in a sandboxed environment
@@ -34,8 +33,8 @@ Access points
   * `vagrant share --ssh` will accomplish both
   * `vagrant share` will allow only the latter
 
-Environment
------------
+## Environment
+
 * you can set the following environment variables to specify the number of cores and amount of RAM in MB to allocate to the VM. If left unset, we will infer sensible defaults (see Vagrantfile).
 
 ```bash
@@ -50,8 +49,8 @@ which can in fact be used to override any value set in the chef run:
 export PELIAS_VAGRANT_CFG=${PWD}/pelias_settings.rb
 ```
 
-Getting started
----------------
+## Getting started
+
 * install VirtualBox, Vagrant and ChefDK
 * `vagrant plugin install vagrant-berkshelf`
 * `vagrant plugin install vagrant-omnibus`
@@ -85,13 +84,13 @@ export PATH=/opt/chefdk/bin:$PATH
 * `vagrant up` will bring it back online for use
 * to start entirely from scratch: `vagrant destroy; vagrant up`, or to just reload all the data: `curl -XDELETE http://localhost:9200/pelias` followed by `vagrant provision`
 
-How long will this take?
-------------------------
+## How long will this take?
+
 * presently, to load the defaults (all of Great Britain from Geonames, and London from OSM): ~30 minutes, not including initial build time of the VM, which is a one time event
 * larger countries with more data, e.g. the US and most countries in Western Europe, will take longer
 
-Tweaking things
----------------
+## Tweaking things
+
 * the `pelias_settings.example.rb` file shows some ways you can define/override values in the provisioning process
 * you can copy this file to a location of your choice and reference it via an environment variable: `PELIAS_VAGRANT_CFG`
   * if the environment variable is set, vagrant will attempt to load the contents of the file it references
@@ -101,7 +100,8 @@ Tweaking things
   * in your profile, `export PELIAS_VAGRANT_CFG=${HOME}/.pelias_settings.rb`
     * this file is now your means of manipulating the vagrant chef run going forward
 
-#### openaddresses
+### openaddresses
+
 * import data from openaddresses with an array of data files from the default data directory in `default.rb` (remove `data_files` hash for the entire global collection):
 ```
   'openaddresses' => {
@@ -112,7 +112,8 @@ Tweaking things
   },
 ```
 
-#### geonames
+### geonames
+
 * multiple geoname countries can be loaded by editing the geonames alpha2 array of [country codes](http://www.geonames.org/countries/) (or you can specify 'all'):
 ```
   'geonames' => {
@@ -124,7 +125,8 @@ Tweaking things
   },
 ```
 
-#### osm
+### osm
+
 * osm extracts you may want to load can be found on the [Mapzen Metro Extracts](https://mapzen.com/metro-extracts) page.
 * multiple extracts can be loaded by updating the extracts hash:
 ```
@@ -139,13 +141,13 @@ Tweaking things
 
 * now that you've edited `PELIAS_VAGRANT_CFG`, run `vagrant up` to start loading data, or `vagrant provision` if you'd previously started the instance
 
-Bugs/Issues
------------
+## Bugs/Issues
+
 * there is presently a bug resulting in the OSM process not exiting on completion of data load for certain extracts
 * there is a [bug](https://github.com/mitchellh/vagrant/issues/5199) in vagrant that prevents re-provisioning if the the system is halted
   * as a workaround, `rm .vagrant/machines/default/virtualbox/synced_folders` and `vagrant reload --provision`
 
-Contributing
-------------
+## Contributing
+
 * yes please!
 * fork, create a feature branch, make your changes, add/update specs, submit a pull request
