@@ -13,6 +13,7 @@ dependencies:
     - eval "$(chef shell-init bash)"
     - cookstyle --version
     - foodcritic --version
+    - chef gem install rspec_junit_formatter
   cache_directories:
     - ./chefdk_0.19.6-1_amd64.deb
     - "~/.berkshelf"
@@ -20,4 +21,4 @@ test:
   override:
     - cookstyle
     - foodcritic .
-    - chef exec rspec
+    - chef exec rspec -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
