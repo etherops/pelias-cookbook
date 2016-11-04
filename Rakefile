@@ -11,8 +11,8 @@ task :build do
 
   # Check ruby syntax
   #
-  puts 'Running rubocop'.color(:blue)
-  sh 'rubocop cookbooks/pelias .'
+  puts 'Running cookstyle'.color(:blue)
+  sh 'cookstyle'
 end
 
 task default: 'build'
