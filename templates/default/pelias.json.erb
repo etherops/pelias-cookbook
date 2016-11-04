@@ -1,11 +1,11 @@
 {
   "esclient": {
-    "apiVersion": "<%= node[:pelias][:esclient][:api_version] %>",
-    "keepAlive": <%= node[:pelias][:esclient][:keepalive] %>,
-    "requestTimeout": "<%= node[:pelias][:esclient][:request_timeout] %>",
-    "maxRetries": "<%= node[:pelias][:esclient][:max_retries] %>",
-    "deadTimeout": "<%= node[:pelias][:esclient][:dead_timeout] %>",
-    "maxSockets": "<%= node[:pelias][:esclient][:max_sockets] %>",
+    "apiVersion": "<%= node['pelias']['esclient']['api_version'] %>",
+    "keepAlive": <%= node['pelias']['esclient']['keepalive'] %>,
+    "requestTimeout": "<%= node['pelias']['esclient']['request_timeout'] %>",
+    "maxRetries": "<%= node['pelias']['esclient']['max_retries'] %>",
+    "deadTimeout": "<%= node['pelias']['esclient']['dead_timeout'] %>",
+    "maxSockets": "<%= node['pelias']['esclient']['max_sockets'] %>",
     "hosts": [
       {
         "env": "dev",
@@ -20,7 +20,7 @@
     },{
       "type": "file",
       "level": [ "error", "warning" ],
-      "path": "<%= node[:pelias][:esclient][:logdir] %>/esclient.log"
+      "path": "<%= node['pelias']['esclient']['logdir'] %>/esclient.log"
     }]
   },
   "logger": {
@@ -28,17 +28,17 @@
   },
   "imports": {
     "openaddresses": {
-      "datapath": "<%= node[:pelias][:openaddresses][:data_dir] %>",
+      "datapath": "<%= node['pelias']['openaddresses']['data_dir'] %>",
       "adminLookup": "true"
     },
     "geonames": {
-      "datapath": "<%= node[:pelias][:geonames][:data_dir] %>",
-      "adminLookup": <%= node[:pelias][:geonames][:admin_lookup] %>
+      "datapath": "<%= node['pelias']['geonames']['data_dir'] %>",
+      "adminLookup": <%= node['pelias']['geonames']['admin_lookup'] %>
     },
     "openstreetmap": {
-      "datapath": "<%= node[:pelias][:osm][:data_dir] %>",
-      "adminLookup": <%= node[:pelias][:osm][:admin_lookup] %>,
-      "leveldbpath": "<%= node[:pelias][:osm][:leveldb] %>",
+      "datapath": "<%= node['pelias']['osm']['data_dir'] %>",
+      "adminLookup": <%= node['pelias']['osm']['admin_lookup'] %>,
+      "leveldbpath": "<%= node['pelias']['osm']['leveldb'] %>",
       "import": [{
         "type": { "node": "osmnode", "way": "osmway" },
         "filename": "<%= @osm_data_file %>"
@@ -48,9 +48,9 @@
   "elasticsearch": {
     "settings": {
       "index": {
-        "number_of_replicas": "<%= node[:pelias][:schema][:replicas] %>",
-        "number_of_shards": "<%= node[:pelias][:schema][:shards] %>",
-        "index.index_concurrency": "<%= node[:pelias][:schema][:concurrency] %>"
+        "number_of_replicas": "<%= node['pelias']['schema']['replicas'] %>",
+        "number_of_shards": "<%= node['pelias']['schema']['shards'] %>",
+        "index.index_concurrency": "<%= node['pelias']['schema']['concurrency'] %>"
       }
     }
   }
