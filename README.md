@@ -60,7 +60,7 @@ eval "$(rbenv init -)"
 export PATH=/opt/chefdk/bin:$PATH
 ```
 
-* copy the included pelias_settings.example.rb to a location of your choice, then export the environment variable `PELIAS_VAGRANT_CFG` to reference it: `export PELIAS_VAGRANT_CFG=/path/to/the/file`
+* copy the included `pelias_settings.example.rb` to a location of your choice, then export the environment variable `PELIAS_VAGRANT_CFG` to reference it: `export PELIAS_VAGRANT_CFG=/path/to/the/file`
   * you can leave the defaults in place until you get familiar with things, or if you're feeling up to it, edit away
   * you can override anything found in `attributes/default.rb`, but typically what you'll want access to is referenced in the example config: `pelias_settings.example.rb`
 * from the repository root run `vagrant up`, which will:
@@ -76,7 +76,7 @@ export PATH=/opt/chefdk/bin:$PATH
     * as soon as the geonames data load starts, you'll be able to start querying the index via the API
     * more details on the API can be found here: [Pelias API](https://github.com/pelias/pelias-doc)
     * in addition, you can access our [Demo](https://mapzen.github.io/leaflet-geocoder/#12/40.7258/-73.9804) which will let you visualize the data you're loading, run searches, etc.
-    * the demo by default uses the endpoint API search.mapzen.com, clone the project and change URL to localhost:3100 to query your local instance
+    * the demo by default uses the endpoint API search.mapzen.com, clone the project and change URL to `localhost:3100` to query your local instance
   * load Geonames data for England into Elasticsearch
   * load an OSM extract for London into Elasticsearch
 * `vagrant suspend` or `vagrant halt` will stop the virtual machine without any data loss
