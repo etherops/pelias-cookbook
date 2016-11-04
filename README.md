@@ -52,8 +52,7 @@ export PELIAS_VAGRANT_CFG=${PWD}/pelias_settings.rb
 ## Getting started
 
 * install VirtualBox, Vagrant and ChefDK
-* `vagrant plugin install vagrant-berkshelf`
-* `vagrant plugin install vagrant-omnibus`
+* `vagrant plugin install vagrant-berkshelf vagrant-omnibus`
 * if you use rbenv or otherwise manipulate your path, make sure you set `/opt/chefdk/bin` ahead of any other locally installed gems that might conflict with berkshelf, foodcritic, etc, e.g.:
 
 ```bash
