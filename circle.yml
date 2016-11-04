@@ -1,6 +1,23 @@
 machine:
   ruby:
     version: 2.2.2
+dependencies:
+  pre:
+    - if ! chef -v; then
+        if ! [ -f chefdk_0.3.5-1_amd64.deb ]; then
+          wget https://packages.chef.io/stable/ubuntu/12.04/chefdk_0.19.6-1_amd64.deb;
+        fi;
+        sudo dpkg -i chefdk_0.19.6-1_amd64.deb;
+      fi
+    - chef --version
+    - eval "$(chef shell-init bash)"
+    - cookstyle --version
+    - foodcritic --version
+  cache_directories:
+    - ./chefdk_0.19.6-1_amd64.deb
+    - "~/.berkshelf"
 test:
   override:
-    - bundle exec rake
+    - cookstyle
+    - foodcritic .
+    - chef exec rspec
