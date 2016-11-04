@@ -1,6 +1,6 @@
 source 'https://api.berkshelf.com'
 
-cookbook 'pelias',        path: 'cookbooks/pelias'
+cookbook 'pelias',        path: './'
 
 cookbook 'apt',           '= 2.7.0'
 cookbook 'java',          '= 1.31.0'
